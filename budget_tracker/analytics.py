@@ -6,7 +6,7 @@ from typing import Dict, Iterable, List, Optional
 
 from .models import Expense
 
-
+#change to float throughout to preserve cents
 def calculate_total(expenses: Iterable[Expense]) -> float:
     return float(sum(float(exp.amount) for exp in expenses))
 
