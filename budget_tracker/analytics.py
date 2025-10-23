@@ -27,6 +27,8 @@ def average_by_category(expenses: Iterable[Expense]) -> Dict[str, float]:
         counts[category] += 1
     return {cat: totals[cat] / counts[cat] for cat in totals}
 
+
+# Return the expense with the highest amount
 def highest_expense(expenses: Iterable[Expense]) -> Optional[Expense]:
     try:
         return max(expenses, key=lambda exp: exp.amount)
