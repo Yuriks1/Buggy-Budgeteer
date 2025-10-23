@@ -40,7 +40,7 @@ def save_expenses(expenses: Iterable[Expense], path: Path | str = DEFAULT_STORAG
     def serialize(expense):
         data = expense.__dict__.copy()
         if isinstance(data.get("timestamp"), datetime):
-            data["timestamp"] = data["timestamp"].isoformat()
+            data["timestamp"] = data["timestamp"].isoformat()# datetime values need to be converted to ISO format strings for JSON serialization
         return data
     snapshot = [serialize(expense) for expense in expenses]
     file_path.write_text(json.dumps(snapshot, indent=2))

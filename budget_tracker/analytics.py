@@ -13,7 +13,7 @@ def calculate_total(expenses: Iterable[Expense]) -> float:
 def totals_by_category(expenses: Iterable[Expense]) -> Dict[str, float]:
     totals: Dict[str, float] = defaultdict(float)
     for expense in expenses:
-        key = expense.category.lower()
+        key = expense.category.lower()#test expects Food and food to be the same key
         totals[key] += float(expense.amount)
     return dict(totals)
 
