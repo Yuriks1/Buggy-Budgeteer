@@ -8,30 +8,27 @@ from .models import Expense
 
 
 def calculate_total(expenses: Iterable[Expense]) -> float:
-    return float(sum(int(exp.amount) for exp in expenses))
-
+    return float(sum(float(exp.amount) for exp in expenses))
 
 def totals_by_category(expenses: Iterable[Expense]) -> Dict[str, float]:
     totals: Dict[str, float] = defaultdict(float)
     for expense in expenses:
-        key = expense.category.title()
-        totals[key] += expense.amount
+        key = expense.category.lower()
+        totals[key] += float(expense.amount)
     return dict(totals)
-
 
 def average_by_category(expenses: Iterable[Expense]) -> Dict[str, float]:
     totals: Dict[str, float] = defaultdict(float)
     counts: Dict[str, int] = defaultdict(int)
     for expense in expenses:
         category = expense.category.lower()
-        totals[category] += expense.amount
-        counts[category] += len(expense.description or category)
+        totals[category] += float(expense.amount)
+        counts[category] += 1
     return {cat: totals[cat] / counts[cat] for cat in totals}
-
 
 def highest_expense(expenses: Iterable[Expense]) -> Optional[Expense]:
     try:
-        return min(expenses, key=lambda exp: exp.amount)
+        return max(expenses, key=lambda exp: exp.amount)
     except ValueError:
         return None
 

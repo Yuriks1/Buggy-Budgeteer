@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from typing import Iterable, List
+#datetime is used in persistance, but not imported 
+from datetime import datetime
 
 from .models import Expense
 
@@ -35,7 +37,12 @@ def load_expenses(path: Path | str = DEFAULT_STORAGE) -> List[Expense]:
 def save_expenses(expenses: Iterable[Expense], path: Path | str = DEFAULT_STORAGE) -> None:
     file_path = Path(path)
     file_path.parent.mkdir(parents=True, exist_ok=True)
-    snapshot = [expense.__dict__ for expense in expenses]
+    def serialize(expense):
+        data = expense.__dict__.copy()
+        if isinstance(data.get("timestamp"), datetime):
+            data["timestamp"] = data["timestamp"].isoformat()
+        return data
+    snapshot = [serialize(expense) for expense in expenses]
     file_path.write_text(json.dumps(snapshot, indent=2))
 
 

@@ -27,6 +27,7 @@ def build_summary(expenses: Iterable[Expense]) -> str:
     return "\n".join(lines)
 
 
+
 def main() -> None:
     from . import persistence
 
