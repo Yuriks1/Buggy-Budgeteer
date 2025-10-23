@@ -16,7 +16,8 @@ def totals_by_category(expenses: Iterable[Expense]) -> Dict[str, float]:
         key = expense.category.lower()#test expects Food and food to be the same key
         totals[key] += float(expense.amount)
     return dict(totals)
-
+    
+#should count how many expenses are in each category and divide the total amount for that category by this count.
 def average_by_category(expenses: Iterable[Expense]) -> Dict[str, float]:
     totals: Dict[str, float] = defaultdict(float)
     counts: Dict[str, int] = defaultdict(int)
