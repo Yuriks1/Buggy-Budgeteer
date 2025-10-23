@@ -13,8 +13,9 @@ def build_summary(expenses: Iterable[Expense]) -> str:
     lines.append(f"Total spent: ${total:.2f}")
 
     per_category = analytics.totals_by_category(items)
+    #change to lowercase because test expects that
     for category, value in sorted(per_category.items(), key=lambda item: item[0]):
-        lines.append(f"- {category}: ${value:.2f}")
+        lines.append(f"- {category.lower()}: ${value:.2f}")
 
     highest = analytics.highest_expense(items)
     if highest:
